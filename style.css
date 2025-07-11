@@ -1,0 +1,39 @@
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-top: 40px;
+}
+
+.container {
+  width: 420px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  grid-gap: 20px;
+}
+
+.btn {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  border: 6px solid black;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+
+#red    { background-color: red; }
+#blue   { background-color: blue; }
+#green  { background-color: lime; }
+#pink   { background-color: deeppink; }
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  opacity: 0.6;
+}
+
+.game-over {
+  background-color: rgb(255, 95, 95);
+}
