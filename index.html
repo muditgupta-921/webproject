@@ -1,21 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Simon Says Game</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Mudit Gupta">
+  <title>Tile & Granite Stock Manager</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Header -->
+  <header class="header">
+    <h1>🧱 Tile & Granite Stock Manager</h1>
+    <button id="toggleTheme">🌞 Toggle Theme</button>
+  </header>
 
-  <h1 id="title">Welcome to my Game</h1>
-  <p>Press any key to start</p>
+  <!-- Dashboard Summary -->
+  <section class="dashboard">
+    <div class="summary-box"><strong>Total Products:</strong> <span id="totalProducts">0</span></div>
+    <div class="summary-box"><strong>Total Quantity:</strong> <span id="totalQuantity">0</span></div>
+    <div class="summary-box"><strong>Total Tiles:</strong> <span id="totalTiles">0</span></div>
+    <div class="summary-box"><strong>Total Granite:</strong> <span id="totalGranite">0</span></div>
+  </section>
 
-  <div class="container">
-    <div class="btn" id="red"></div>
-    <div class="btn" id="blue"></div>
-    <div class="btn" id="green"></div>
-    <div class="btn" id="pink"></div>
+  <!-- Controls -->
+  <section class="controls">
+    <input type="text" id="searchInput" placeholder="🔍 Search by name or category" />
+    <select id="sortSelect">
+      <option value="latest">Sort by Latest</option>
+      <option value="name">Sort by Name</option>
+      <option value="quantity">Sort by Quantity</option>
+      <option value="category">Sort by Category</option>
+    </select>
+    <input type="date" id="filterDate" />
+    <button id="exportJson">⬇️ Export JSON</button>
+    <button id="exportCSV">⬇️ Export CSV</button>
+    <input type="file" id="importFile" accept=".json" />
+  </section>
+
+  <!-- Add Product Form -->
+  <section class="add-product">
+    <h2>Add New Product</h2>
+    <form id="productForm">
+      <label>Product Name: <input type="text" id="name" required /></label>
+      <label>Category:
+        <select id="category" required>
+          <option value="">-- Select --</option>
+          <option value="Tile">Tile</option>
+          <option value="Granite">Granite</option>
+        </select>
+      </label>
+      <label>Quantity: <input type="number" id="quantity" required min="1" /></label>
+      <label>Upload Photo: <input type="file" id="photo" accept="image/*" /></label>
+      <div id="photoPreview"></div>
+      <button type="submit">Add Product</button>
+    </form>
+  </section>
+
+  <!-- Stock List -->
+  <section class="stock-section">
+    <h2>📦 Current Stock</h2>
+    <div id="productList" class="product-grid"></div>
+  </section>
+
+  <!-- Modals -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('editModal')">&times;</span>
+      <h3>Edit Product</h3>
+      <form id="editForm">
+        <input type="hidden" id="editId" />
+        <label>Name: <input type="text" id="editName" required /></label>
+        <label>Category:
+          <select id="editCategory" required>
+            <option value="Tile">Tile</option>
+            <option value="Granite">Granite</option>
+          </select>
+        </label>
+        <label>Quantity: <input type="number" id="editQuantity" required min="1" /></label>
+        <button type="submit">Save</button>
+      </form>
+    </div>
   </div>
+
+  <div id="historyModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('historyModal')">&times;</span>
+      <h3>📜 Stock History</h3>
+      <div id="historyContent"></div>
+    </div>
+  </div>
+
+  <div id="imageModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('imageModal')">&times;</span>
+      <img id="modalImage" src="" alt="Preview" />
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mudit Gupta — Tile & Granite Inventory System</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
